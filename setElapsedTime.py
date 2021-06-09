@@ -38,9 +38,10 @@ for x in resultRows:
         spentTimeValues = {"$set": {"spentTime": time}}
         cardsDoc.update_one(query, spentTimeValues)
     elif "endAt" in x:
-        dTime = x["endAt"] - x["startAt"]
-        time = round(dTime.total_seconds()/60/60, 1)
-        query = {"_id": cardID}
-        spentTimeValues = {"$set": {"spentTime": time}}
-        cardsDoc.update_one(query, spentTimeValues)
+        if(x["endAt"]):
+            dTime = x["endAt"] - x["startAt"]
+            time = round(dTime.total_seconds()/60/60, 1)
+            query = {"_id": cardID}
+            spentTimeValues = {"$set": {"spentTime": time}}
+            cardsDoc.update_one(query, spentTimeValues)
 
